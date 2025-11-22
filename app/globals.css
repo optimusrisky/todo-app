@@ -19,6 +19,7 @@
 
 input[type="text"] {
   border: 1px solid var(--border-color);
+  width: 300px;
   border-radius: 8px;
   background: var(--sub-bg-color);
   padding: 8px 16px;
@@ -33,4 +34,11 @@ input[type="text"] {
   color: var(--white-text-color);
   border-radius: 8px;
   font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
 }
