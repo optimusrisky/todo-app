@@ -3,11 +3,12 @@
 :root {
   --main-bg-color: #fdfdfe;
   --sub-bg-color: #ffffff;
-  --border-color: #e5e7eb;
+  --border-color: #a9a9a9;
   --main-text-color: #1f2937;
   --sub-text-color: #a9a9a9;
   --white-text-color: #ffffff;
   --main-btn-color: #1e73e3;
+  --disable-color: #d3d3d3;
   --tag-color: #e5e7eb;
 }
 
@@ -28,6 +29,10 @@ input[type="text"] {
   }
 }
 
+button:disabled:active {
+  transform: none;
+}
+
 .main-button {
   padding: 8px 16px;
   background: var(--main-btn-color);
@@ -40,5 +45,12 @@ input[type="text"] {
   &:active {
     transform: translateY(2px);
     box-shadow: none;
+  }
+
+  &:disabled {
+    background: var(--disable-color);
+    color: #fff;
+    box-shadow: none;
+    cursor: default;
   }
 }
