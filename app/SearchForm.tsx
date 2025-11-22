@@ -1,15 +1,25 @@
 "use client";
+import { Task } from "@/types/types";
 import { useState } from "react";
 
 /** 検索フォームコンポーネント */
 export const SearchForm = () => {
-  const [inputtedTask, setInputtedTask] = useState("");
+  const [taskTitle, setTaskTitle] = useState("");
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   /** フォーム送信 */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(inputtedTask);
-    setInputtedTask("");
+    const now = new Date().toLocaleString();
+    const newTask: Task = {
+      id: tasks.length + 1,
+      title: taskTitle,
+      isCompleted: false,
+      createdAt: now,
+    };
+    setTasks((prev) => [...prev, newTask]);
+    console.log(tasks);
+    setTaskTitle("");
   };
 
   return (
@@ -20,10 +30,15 @@ export const SearchForm = () => {
             type="text"
             name="task"
             placeholder="タスクを入力してください"
-            value={inputtedTask}
-            onChange={(e) => setInputtedTask(e.target.value)}
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
           />
-          <button type="submit" value={inputtedTask} className="main-button">
+          <button
+            type="submit"
+            value={taskTitle}
+            disabled={!taskTitle}
+            className="main-button"
+          >
             追加
           </button>
         </div>
