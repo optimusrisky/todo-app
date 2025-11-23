@@ -16,9 +16,9 @@ export const Tasks = ({ tasks, onCheckTask }: Props) => {
   return (
     <div>
       {tasks.map((task, idx) => (
-        <button
+        <div
           key={task.id}
-          className={`p-4 flex items-center gap-2 border border-(--border-color) w-full ${clsx(
+          className={`p-4 flex items-center gap-2 border border-[var(--border-color)] w-full ${clsx(
             {
               "rounded-xl": tasks.length === 1,
               "rounded-t-xl": getTaskOrder(idx) === "first",
@@ -31,20 +31,20 @@ export const Tasks = ({ tasks, onCheckTask }: Props) => {
           <input
             type="checkbox"
             id={task.id.toString()}
-            name="title"
             checked={task.isCompleted}
             readOnly
           />
-          <label
-            className={`flex gap-2 items-center text-xl text-(--main-text-color) break-all text-left ${clsx(
+          <div
+            className={`flex gap-2 items-center text-xl text-[var(--main-text-color)] break-all text-left cursor-default ${clsx(
               {
-                "line-through decoration-(--main-text-color)": task.isCompleted,
+                "line-through decoration-[var(--main-text-color)]":
+                  task.isCompleted,
               }
             )}`}
           >
             {task.title}
-          </label>
-        </button>
+          </div>
+        </div>
       ))}
     </div>
   );
