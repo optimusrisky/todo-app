@@ -7,23 +7,23 @@ interface Props {
 }
 
 export const Tasks = ({ tasks, onCheckTask }: Props) => {
-  const getTaskOrder = (id: number): "first" | "last" | "other" => {
-    if (id === 1) return "first";
-    if (id === tasks.length) return "last";
+  const getTaskOrder = (idx: number): "first" | "last" | "other" => {
+    if (idx === 0) return "first";
+    if (idx === tasks.length - 1) return "last";
     return "other";
   };
 
   return (
     <div>
-      {tasks.map((task) => (
+      {tasks.map((task, idx) => (
         <button
           key={task.id}
           className={`p-4 flex items-center gap-2 border border-(--border-color) w-full ${clsx(
             {
               "rounded-xl": tasks.length === 1,
-              "rounded-t-xl": getTaskOrder(task.id) === "first",
-              "border-t-0": getTaskOrder(task.id) === "other",
-              "border-t-0 rounded-b-xl": getTaskOrder(task.id) === "last",
+              "rounded-t-xl": getTaskOrder(idx) === "first",
+              "border-t-0": getTaskOrder(idx) === "other",
+              "border-t-0 rounded-b-xl": getTaskOrder(idx) === "last",
             }
           )} `}
           onClick={() => onCheckTask(task.id)}
@@ -35,7 +35,13 @@ export const Tasks = ({ tasks, onCheckTask }: Props) => {
             checked={task.isCompleted}
             readOnly
           />
-          <label className="flex gap-2 items-center text-xl">
+          <label
+            className={`flex gap-2 items-center text-xl text-(--main-text-color) break-all text-left ${clsx(
+              {
+                "line-through decoration-(--main-text-color)": task.isCompleted,
+              }
+            )}`}
+          >
             {task.title}
           </label>
         </button>

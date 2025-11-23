@@ -1,12 +1,20 @@
 "use client";
+
 import { Task } from "@/types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tasks } from "./Tasks";
 
 /** 検索フォームコンポーネント */
 export const SearchForm = () => {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  // 初期表示時、localStorageに保存されたタスクを取得する
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!!savedTasks) setTasks(JSON.parse(savedTasks));
+  }, []);
 
   /** フォーム送信 */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,8 +26,10 @@ export const SearchForm = () => {
       isCompleted: false,
       createdAt: now,
     };
-    setTasks((prev) => [...prev, newTask]);
-    console.log(tasks);
+    const newTasks = [newTask, ...tasks];
+    setTasks(newTasks);
+    // localStorageへ保存
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
     setTaskTitle("");
   };
 
@@ -35,18 +45,20 @@ export const SearchForm = () => {
       else return task;
     });
     setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
 
   return (
     <>
-      <div className="flex gap-4">
-        <form onSubmit={(e) => handleSubmit(e)}>
+      <div className="flex gap-4 w-full">
+        <form onSubmit={(e) => handleSubmit(e)} className="w-full">
           <div className="flex gap-4">
             <input
               type="text"
               name="task"
               placeholder="タスクを入力してください"
               value={taskTitle}
+              className="flex-1"
               onChange={(e) => setTaskTitle(e.target.value)}
             />
             <button
