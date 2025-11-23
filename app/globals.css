@@ -10,6 +10,7 @@
   --main-btn-color: #1e73e3;
   --disable-color: #d3d3d3;
   --tag-color: #e5e7eb;
+  --alert-color: #b22222;
 }
 
 @theme inline {
@@ -38,8 +39,11 @@ label > input[type="checkbox"] {
   font-size: 24px;
 }
 
-button:disabled:active {
-  transform: none;
+button {
+  cursor: pointer;
+  &:disabled:active {
+    transform: none;
+  }
 }
 
 .main-button {
@@ -48,7 +52,6 @@ button:disabled:active {
   color: var(--white-text-color);
   border-radius: 8px;
   font-weight: bold;
-  cursor: pointer;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 
   &:active {

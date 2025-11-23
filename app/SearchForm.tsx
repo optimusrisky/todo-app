@@ -48,6 +48,12 @@ export const SearchForm = () => {
     localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
 
+  const handleDeleteTask = (id: number) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+  };
+
   return (
     <>
       <div className="flex gap-4 w-full">
@@ -72,7 +78,11 @@ export const SearchForm = () => {
           </div>
         </form>
       </div>
-      <Tasks tasks={tasks} onCheckTask={handleCheckTask} />
+      <Tasks
+        tasks={tasks}
+        onCheckTask={handleCheckTask}
+        onDeleteTask={handleDeleteTask}
+      />
     </>
   );
 };
