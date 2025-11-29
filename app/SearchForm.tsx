@@ -3,6 +3,7 @@
 import { Task } from "@/types/types";
 import { useEffect, useState } from "react";
 import { Tasks } from "./Tasks";
+import { Filters } from "./Filters";
 
 /** 検索フォームコンポーネント */
 export const SearchForm = () => {
@@ -78,6 +79,7 @@ export const SearchForm = () => {
           </div>
         </form>
       </div>
+      <Filters />
       <Tasks
         tasks={tasks}
         onCheckTask={handleCheckTask}
