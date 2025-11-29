@@ -6,7 +6,7 @@ import { Tasks } from "./Tasks";
 import { Filters } from "./Filters";
 
 /** 検索フォームコンポーネント */
-export const SearchForm = () => {
+export const TaskAddForm = () => {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
 
