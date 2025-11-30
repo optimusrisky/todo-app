@@ -71,12 +71,14 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
           )} `}
         >
           <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id={task.id.toString()}
-              checked={task.isCompleted}
-              onChange={() => onCheckTask(task.id)}
-            />
+            <div>
+              <input
+                type="checkbox"
+                id={task.id.toString()}
+                checked={task.isCompleted}
+                onChange={() => onCheckTask(task.id)}
+              />
+            </div>
             <div className="flex flex-col gap-1">
               <label
                 htmlFor={task.id.toString()}
@@ -89,19 +91,14 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
               >
                 {task.title}
               </label>
-              <div className="md:hidden py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md ">
+              <div className="py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md w-fit">
                 追加日: {new Date(task.createdAt).toLocaleDateString()}
               </div>
             </div>
           </div>
-          <div className="flex gap-4 items-center">
-            <div className="hidden md:block py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md ">
-              追加日: {new Date(task.createdAt).toLocaleDateString()}
-            </div>
-            <button onClick={() => onDeleteTask(task.id)}>
-              <TbTrash className="text-[var(--alert-color)] w-6 h-6" />
-            </button>
-          </div>
+          <button onClick={() => onDeleteTask(task.id)}>
+            <TbTrash className="text-[var(--alert-color)] w-6 h-6" />
+          </button>
         </div>
       ))}
     </div>
