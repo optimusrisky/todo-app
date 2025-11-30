@@ -61,7 +61,7 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
       {filteredTasks.map((task, idx) => (
         <div
           key={task.id}
-          className={`p-4 flex justify-between border border-[var(--border-color)] w-full ${clsx(
+          className={`p-4 flex flex-nowrap justify-between border border-[var(--border-color)] w-full ${clsx(
             {
               "rounded-xl": filteredTasks.length === 1,
               "rounded-t-xl": getTaskOrder(idx) === "first",
@@ -77,20 +77,25 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
               checked={task.isCompleted}
               onChange={() => onCheckTask(task.id)}
             />
-            <label
-              htmlFor={task.id.toString()}
-              className={`flex gap-2 items-center text-lg text-[var(--main-text-color)] break-all text-left cursor-default ${clsx(
-                {
-                  "line-through decoration-[var(--main-text-color)]":
-                    task.isCompleted,
-                }
-              )}`}
-            >
-              {task.title}
-            </label>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor={task.id.toString()}
+                className={`flex gap-2 items-center text-lg text-[var(--main-text-color)] break-all text-left cursor-default ${clsx(
+                  {
+                    "line-through decoration-[var(--main-text-color)]":
+                      task.isCompleted,
+                  }
+                )}`}
+              >
+                {task.title}
+              </label>
+              <div className="md:hidden py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md ">
+                追加日: {new Date(task.createdAt).toLocaleDateString()}
+              </div>
+            </div>
           </div>
           <div className="flex gap-4 items-center">
-            <div className="py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md">
+            <div className="hidden md:block py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md ">
               追加日: {new Date(task.createdAt).toLocaleDateString()}
             </div>
             <button onClick={() => onDeleteTask(task.id)}>
