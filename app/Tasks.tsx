@@ -89,9 +89,14 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
               {task.title}
             </label>
           </div>
-          <button onClick={() => onDeleteTask(task.id)}>
-            <TbTrash className="text-[var(--alert-color)] w-6 h-6" />
-          </button>
+          <div className="flex gap-4 items-center">
+            <div className="py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg">
+              追加日: {new Date(task.createdAt).toLocaleDateString()}
+            </div>
+            <button onClick={() => onDeleteTask(task.id)}>
+              <TbTrash className="text-[var(--alert-color)] w-6 h-6" />
+            </button>
+          </div>
         </div>
       ))}
     </div>
