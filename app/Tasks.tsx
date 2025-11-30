@@ -1,5 +1,7 @@
 import { Task } from "@/types/types";
 import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { TbTrash } from "react-icons/tb";
 
 interface Props {
@@ -8,21 +10,60 @@ interface Props {
   onDeleteTask: (id: number) => void;
 }
 
+/** タスク表示コンポーネント */
 export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
+  const searchParams = useSearchParams();
+
+  const isCompleted = searchParams.get("isCompleted");
+  const createdAt = searchParams.get("createdAt");
+
+  /** Filtersによってフィルタリングされたタスク */
+  const filteredTasks = useMemo(() => {
+    let result = [...tasks];
+
+    // isCompletedでフィルタリング
+    if (isCompleted === "true") {
+      result = result.filter((task) => task.isCompleted);
+    } else if (isCompleted === "false") {
+      result = result.filter((task) => !task.isCompleted);
+    }
+    // isCompletedがnullの場合は全て表示（フィルタリングしない）
+
+    // createdAtでソート
+    if (createdAt === "asc") {
+      result.sort((a, b) => {
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        return dateA - dateB;
+      });
+    } else if (createdAt === "desc") {
+      result.sort((a, b) => {
+        const dateA = new Date(a.createdAt).getTime();
+        const dateB = new Date(b.createdAt).getTime();
+        return dateB - dateA;
+      });
+    }
+    // createdAtがnullの場合は既定の順番（ソートしない）
+    // フィルタリング条件がない場合はそのまま返却
+    return result;
+    // tasks, isCompleted, createdAtが変更された時のみ再計算
+  }, [tasks, isCompleted, createdAt]);
+
+  /** 要素の順番を判定する関数 */
   const getTaskOrder = (idx: number): "first" | "last" | "other" => {
     if (idx === 0) return "first";
-    if (idx === tasks.length - 1) return "last";
+    if (idx === filteredTasks.length - 1) return "last";
     return "other";
   };
 
   return (
     <div>
-      {tasks.map((task, idx) => (
+      {filteredTasks.map((task, idx) => (
         <div
           key={task.id}
           className={`p-4 flex justify-between border border-[var(--border-color)] w-full ${clsx(
             {
-              "rounded-xl": tasks.length === 1,
+              "rounded-xl": filteredTasks.length === 1,
               "rounded-t-xl": getTaskOrder(idx) === "first",
               "border-t-0": getTaskOrder(idx) === "other",
               "border-t-0 rounded-b-xl": getTaskOrder(idx) === "last",
