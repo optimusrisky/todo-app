@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo App
 
-## Getting Started
+Next.js と Tailwind CSS で作られたシンプルな Todo アプリケーションです。
 
-First, run the development server:
+## 機能
+
+- ✅ タスクの追加
+- ✅ タスクの完了/未完了の切り替え
+- ✅ タスクの削除
+- 🔍 フィルタリング機能（完了/未完了でフィルタ）
+- 📅 ソート機能（作成日で昇順/降順）
+- 💾 ローカルストレージにデータを自動保存
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 16.0.3 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS 4
+- **UI ライブラリ**: React Icons
+- **ユーティリティ**: clsx
+
+## セットアップ
+
+### 必要な環境
+
+- Node.js 18 以上
+- pnpm（推奨）または npm/yarn/bun
+
+### インストール
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 依存関係のインストール
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 開発サーバーの起動
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて確認してください。
 
-## Learn More
+### ビルド
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 本番環境での起動
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm start
+```
 
-## Deploy on Vercel
+## プロジェクト構成
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+todo-app/
+├── app/
+│   ├── page.tsx          # メインページ
+│   ├── layout.tsx        # ルートレイアウト
+│   ├── TaskAddForm.tsx   # タスク追加フォームコンポーネント
+│   ├── Tasks.tsx         # タスク一覧表示コンポーネント
+│   └── Filters.tsx       # フィルタリング/ソーティングコンポーネント
+├── types/
+│   └── types.ts          # TypeScript型定義
+├── styles/
+│   └── globals.css       # グローバルスタイル
+└── public/               # 静的ファイル
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 主な機能の説明
+
+### タスク管理
+
+- タスクはブラウザの localStorage に自動保存されます
+- ページをリロードしてもタスクは保持されます
+- タスクには作成日が自動的に記録されます
+
+### フィルタリング
+
+URL パラメータを使用してフィルタリングを行います：
+
+- `?isCompleted=true` - 完了済みタスクのみ表示
+- `?isCompleted=false` - 未完了タスクのみ表示
+
+### ソート
+
+URL パラメータを使用してソートを行います：
+
+- `?createdAt=asc` - 作成日昇順
+- `?createdAt=desc` - 作成日降順
+
+フィルタとソートは組み合わせて使用できます。
+
+## ライセンス
+
+このプロジェクトはプライベートプロジェクトです。
