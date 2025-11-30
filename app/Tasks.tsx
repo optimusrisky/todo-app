@@ -79,7 +79,7 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
             />
             <label
               htmlFor={task.id.toString()}
-              className={`flex gap-2 items-center text-xl text-[var(--main-text-color)] break-all text-left cursor-default ${clsx(
+              className={`flex gap-2 items-center text-lg text-[var(--main-text-color)] break-all text-left cursor-default ${clsx(
                 {
                   "line-through decoration-[var(--main-text-color)]":
                     task.isCompleted,
@@ -90,7 +90,7 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
             </label>
           </div>
           <div className="flex gap-4 items-center">
-            <div className="py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg">
+            <div className="py-1 px-2 bg-[var(--tag-bg-color)] rounded-lg text-md">
               追加日: {new Date(task.createdAt).toLocaleDateString()}
             </div>
             <button onClick={() => onDeleteTask(task.id)}>

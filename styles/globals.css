@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --main-bg-color: #fdfdfe;
+  --sub-bg-color: #ffffff;
+  --tag-bg-color: #dcdcdc;
+  --border-color: #a9a9a9;
+  --main-text-color: #1f2937;
+  --sub-text-color: #a9a9a9;
+  --white-text-color: #ffffff;
+  --main-btn-color: #1e73e3;
+  --disable-color: #d3d3d3;
+  --tag-color: #e5e7eb;
+  --alert-color: #b22222;
+}
+
+@layer base {
+  body {
+    color: var(--main-text-color);
+  }
+  select {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--sub-bg-color);
+    font-size: 18px;
+  }
+
+  input {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--sub-bg-color);
+  }
+
+  input::placeholder {
+    color: var(--sub-text-color);
+  }
+
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+
+  button {
+    cursor: pointer;
+    font-size: 18px;
+
+    &:disabled:active {
+      transform: none;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+}
+
+.main-button {
+  padding: 8px 16px;
+  background: var(--main-btn-color);
+  color: var(--white-text-color);
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.main-button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.main-button:disabled {
+  background: var(--disable-color);
+  color: #fff;
+  box-shadow: none;
+  cursor: default;
+}
