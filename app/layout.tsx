@@ -8,7 +8,7 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "To Do App",
+  title: "Todo App",
   description: "A simple to do app built with Next.js and Tailwind CSS",
 };
 
