@@ -12,14 +12,14 @@ export const Filters = () => {
   const url = new URLSearchParams(searchParams);
 
   const changeIsCompleted = (value: string) => {
-    if (!!value) {
+    if (value) {
       url.set("isCompleted", value);
     } else url.delete("isCompleted");
     router.push(`${pathname}?${url}`);
   };
 
   const changeOrderOfCreatedAt = (value: string) => {
-    if (!!value) {
+    if (value) {
       url.set("createdAt", value);
     } else url.delete("createdAt");
     router.push(`${pathname}?${url}`);

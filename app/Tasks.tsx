@@ -1,8 +1,8 @@
-import { Task } from "@/types/types";
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { TbTrash } from "react-icons/tb";
+import type { Task } from "@/types/types";
 
 interface Props {
   tasks: Task[];
@@ -96,7 +96,7 @@ export const Tasks = ({ tasks, onCheckTask, onDeleteTask }: Props) => {
               </div>
             </div>
           </div>
-          <button onClick={() => onDeleteTask(task.id)}>
+          <button type="button" onClick={() => onDeleteTask(task.id)}>
             <TbTrash className="text-[var(--alert-color)] w-6 h-6" />
           </button>
         </div>

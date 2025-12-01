@@ -52,10 +52,6 @@
   }
 }
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-}
-
 .main-button {
   padding: 8px 16px;
   background: var(--main-btn-color);

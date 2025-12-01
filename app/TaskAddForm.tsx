@@ -1,9 +1,9 @@
 "use client";
 
-import { Task } from "@/types/types";
 import { useEffect, useState } from "react";
-import { Tasks } from "./Tasks";
+import type { Task } from "@/types/types";
 import { Filters } from "./Filters";
+import { Tasks } from "./Tasks";
 
 /** 検索フォームコンポーネント */
 export const TaskAddForm = () => {
@@ -14,7 +14,7 @@ export const TaskAddForm = () => {
   useEffect(() => {
     const savedTasks = localStorage.getItem("tasks");
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!!savedTasks) setTasks(JSON.parse(savedTasks));
+    if (savedTasks) setTasks(JSON.parse(savedTasks));
   }, []);
 
   /** フォーム送信 */
