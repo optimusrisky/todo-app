@@ -72,7 +72,7 @@ export const TaskAddForm = () => {
               type="submit"
               value={taskTitle}
               disabled={!taskTitle}
-              className="main-button"
+              className="main-button text-nowrap"
             >
               追加
             </button>
